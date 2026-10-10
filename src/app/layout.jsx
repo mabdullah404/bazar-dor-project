@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Hind_Siliguri } from "next/font/google";
 import "./globals.css";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./components/Navbar";
@@ -6,14 +6,11 @@ import Marquee from "./components/Marquee";
 import Footer from "./components/Footer";
 import { ToastContainer } from "react-toastify";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+// গুগল বাংলা ফন্ট Hind Siliguri কনফিগারেশন
+const hindSiliguri = Hind_Siliguri({
+  weight: ["300", "400", "500", "600", "700"],
+  subsets: ["bengali", "latin"],
+  display: "swap",
 });
 
 export const metadata = {
@@ -26,9 +23,9 @@ export default function RootLayout({ children }) {
     <html
       data-theme="light"
       lang="bn"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${hindSiliguri.className} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#f4f7f5] text-gray-900">
+      <body className="min-h-full flex flex-col bg-[#f4f7f5] text-gray-900 font-sans">
         {/* সব পেজে ন্যাভবার */}
         <Navbar />
         
