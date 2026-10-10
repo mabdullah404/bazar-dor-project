@@ -1,0 +1,29 @@
+import React from "react";
+import Marquee from "./components/Marquee";
+import Hero from "./components/Hero";
+import PriceChanges from "./components/PriceChanges";
+import AllProducts from "./components/AllProducts";
+
+// ====================================================================
+// হোম পেইজ (Home Page)
+// এখানে পর্যায়ক্রমে মারকুই, হিরো, দাম বৃদ্ধি-হ্রাস এবং সব পণ্য সেকশন সাজানো হয়েছে
+// ====================================================================
+export default async function Home({ searchParams }) {
+  // ক্যাটাগরি ফিল্টার কুয়েরি প্যারামিটার (যেমন: ?category=chal)
+  const params = await searchParams;
+  const selectedCategory =
+    typeof params?.category === "string" ? params.category : "";
+
+  return (
+    <main className="min-h-screen bg-[#f4f7f5] pb-24">
+      {/* ১. রিয়েল-টাইম বাজার দর স্ক্রোলিং মারকুই (Marquee) */}
+      <Marquee />
+
+      {!selectedCategory && <Hero />}
+
+      {!selectedCategory && <PriceChanges />}
+
+      <AllProducts category={selectedCategory} />
+    </main>
+  );
+}
