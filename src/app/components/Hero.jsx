@@ -54,7 +54,7 @@ const Hero = () => {
             {/* ৪. 'সব পণ্য দেখুন' অ্যাকশন বাটন */}
             <div className="pt-2">
               <Link
-                href="#all-products"
+                href="#সব-পণ্য"
                 className="inline-block bg-[#059669] hover:bg-[#047857] text-white font-medium text-sm sm:text-base px-6 py-2.5 rounded-xl shadow-xs hover:shadow-md transition-all cursor-pointer"
               >
                 সব পণ্য দেখুন

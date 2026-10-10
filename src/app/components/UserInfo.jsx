@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 import { authClient } from "@/lib/auth-client";
 
 const UserInfo = () => {
@@ -28,6 +29,7 @@ const UserInfo = () => {
     try {
       setIsOpen(false);
       await authClient.signOut();
+      toast.info("সফলভাবে সাইন আউট হয়েছেন!");
       router.push("/");
       router.refresh();
     } catch (error) {

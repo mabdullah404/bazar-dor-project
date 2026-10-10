@@ -1,6 +1,8 @@
 import React from "react";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
+import { headers } from "next/headers";
+import { auth } from "@/lib/auth";
 
 // ====================================================================
 // ১. সংখ্যাকে বাংলায় রূপান্তর করার ফাংশন
@@ -64,6 +66,16 @@ async function getProduct(id) {
     );
 
     if (!res.ok) {
+      // যদি ID দিয়ে না পাওয়া যায়, তবে সব প্রডাক্ট ফেচ করে slug দিয়ে চেক করবে
+      const allRes = await fetch("https://api.abcz.workers.dev/api/bazardor/products", {
+        next: { revalidate: 60 },
+      });
+      if (allRes.ok) {
+        const allProducts = await allRes.json();
+        return allProducts.find(
+          (p) => String(p.id) === String(id) || p.slug === String(id)
+        ) || null;
+      }
       return null;
     }
 
@@ -94,10 +106,20 @@ export async function generateMetadata({ params }) {
 }
 
 // ====================================================================
-// ৭. প্রডাক্ট ডিটেইলস পেজ কম্পোনেন্ট
+// ৭. প্রডাক্ট ডিটেইলস পেজ কম্পোনেন্ট (Protected Route)
 // ====================================================================
 export default async function ProductDetailPage({ params }) {
   const { id } = await params;
+
+  // প্রোটেক্টেড রাউট চেক — ইউজার লগইন না থাকলে সাইন ইন পেজে পাঠাবে
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session?.user) {
+    redirect(`/signin?redirect=/products/${encodeURIComponent(id)}&auth_required=true`);
+  }
+
   const product = await getProduct(id);
 
   // যদি পণ্য না পাওয়া যায় তবে 404 পেজে রিডাইরেক্ট করবে

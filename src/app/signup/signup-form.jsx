@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 import { authClient } from "@/lib/auth-client";
 import SocialAuth from "../components/SocialAuth";
 
@@ -22,7 +23,9 @@ export default function SignupForm() {
     const confirmPassword = formData.get("confirmPassword");
 
     if (password !== confirmPassword) {
-      setMessage("দুটি পাসওয়ার্ড মিলছে না। আবার পরীক্ষা করুন।");
+      const err = "দুটি পাসওয়ার্ড মিলছে না। আবার পরীক্ষা করুন।";
+      setMessage(err);
+      toast.error(err);
       return;
     }
 
@@ -36,17 +39,22 @@ export default function SignupForm() {
       });
 
       if (error) {
-        setMessage(error.message || "অ্যাকাউন্ট তৈরি করতে সমস্যা হয়েছে।");
+        const errorText = error.message || "অ্যাকাউন্ট তৈরি করতে সমস্যা হয়েছে।";
+        setMessage(errorText);
+        toast.error(errorText);
         setLoading(false);
         return;
       }
 
-      // সফল হলে হোম পেজে রিডাইরেক্ট হবে
-      router.push("/");
+      // সফল হলে সাইন ইন পেজে পাঠাবে এবং সাকসেস টোস্ট দেখাবে
+      toast.success("অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে! অনুগ্রহ করে সাইন ইন করুন।");
+      router.push("/signin");
       router.refresh();
     } catch (err) {
       console.error("Sign up error:", err);
-      setMessage("অ্যাকাউন্ট তৈরিতে ত্রুটি হয়েছে। আবার চেষ্টা করুন।");
+      const errText = "অ্যাকাউন্ট তৈরিতে ত্রুটি হয়েছে। আবার চেষ্টা করুন।";
+      setMessage(errText);
+      toast.error(errText);
       setLoading(false);
     }
   }

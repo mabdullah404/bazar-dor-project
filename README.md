@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🛒 বাজার দর (Bazar Dor) — নিত্যপ্রয়োজনীয় পণ্যের বাজার দর ট্র্যাকার
 
-## Getting Started
+একটি আধুনিক, দ্রুত ও রেসপনসিভ ওয়েব অ্যাপ্লিকেশন যা ব্যবহারকারীদের নিত্যপ্রয়োজনীয় পণ্যের প্রতিদিনের বাজার দর, দামের ওঠানামা এবং বাজারভিত্তিক তুলনামূলক তথ্য সহজে দেখতে সাহায্য করে।
 
-First, run the development server:
+---
 
+## 📌 প্রজেক্টের সংক্ষিপ্ত বিবরণ (Project Overview)
+**বাজার দর** হলো সাধারণ ক্রেতাদের সুবিধার জন্য তৈরি একটি ডিজিটাল বাজার মনিটরিং প্ল্যাটফর্ম। প্রতিদিন বাজারে বিভিন্ন নিত্যপণ্যের (চাল, ডাল, তেল, সবজি, মাছ, মাংস ইত্যাদি) দামের পরিবর্তন, কোন বাজারে কেমন দাম এবং সামগ্রিক বাজার পরিস্থিতি এক নজরে দেখার জন্য এই অ্যাপ্লিকেশনটি তৈরি করা হয়েছে।
+
+---
+
+## 🚀 ব্যবহৃত প্রযুক্তিসমূহ (Technologies Used)
+- **ফ্রন্টএন্ড ও ফ্রেমওয়ার্ক:** [Next.js](https://nextjs.org/) (App Router, Version 16) & [React](https://react.js.org/)
+- **স্টাইলিং ও ডিজাইন:** [Tailwind CSS](https://tailwindcss.com/) ও [DaisyUI](https://daisyui.com/)
+- **অথেনটিকেশন (Authentication):** [Better Auth](https://www.better-auth.com/) (Email/Password, Google & GitHub Social Login)
+- **ডাটাবেজ:** [MongoDB Atlas](https://www.mongodb.com/atlas)
+- **নোটিফিকেশন ও অ্যালার্ট:** [React-Toastify](https://fkhadra.github.io/react-toastify/)
+- **আইকন:** [React Icons](https://react-icons.github.io/react-icons/)
+- **হোস্টিং ও ডিপ্লয়মেন্ট:** Vercel
+
+---
+
+## ✨ প্রধান বৈশিষ্ট্যসমূহ (Key Features - Minimum 5)
+
+### ১. 🔄 লাইভ প্রাইস মারকুই (Live Price Ticker)
+- ব্যানারের নিচে একটি ইনফিনিট স্ক্রোলিং মারকুই স্ট্রিপ রয়েছে যা বিভিন্ন পণ্যের ইমোজি, নাম, আজকের দাম এবং দামের পরিবর্তনের হার (▲ বৃদ্ধি / ▼ হ্রাস / — অপরিবর্তিত) রিয়েল-টাইমে প্রদর্শন করে।
+- মাউস হোভার করলে স্ক্রোলিং সাময়িকভাবে থেমে থাকে যেন সহজে পড়া যায়।
+
+### ২. 🏷️ ইন্টারেক্টিভ ক্যাটাগরি ফিল্টারিং ও অ্যাক্টিভ হাইলাইট (Category Navigation)
+- শীর্ষভাগে অনুভূমিক ক্যাটাগরি বার রয়েছে (যেমন: সকল পণ্য, চাল, ডাল, মাছ, মাংস, শাকসবজি ইত্যাদি)।
+- ব্যবহারকারী যে ক্যাটাগরিতে ক্লিক করবেন, সেটি চমৎকার সবুজ রঙে হাইলাইট হয়ে থাকবে এবং সেই ক্যাটাগরির পণ্যগুলো ফিল্টার হয়ে প্রদর্শিত হবে।
+
+### ৩. 📊 দাম অনুযায়ী সর্টিং অপশন (Sort by Price Dropdown)
+- পণ্য তালিকার উপরে একটি "সাজান" (Sort) ড্রপডাউন অপশন রয়েছে:
+  - **ডিফল্ট (Default)**
+  - **দাম: কম থেকে বেশি (Price: Low to High)**
+  - **দাম: বেশি থেকে কম (Price: High to Low)**
+- বাংলা সংখ্যা ও মুদ্রা সঠিকভাবে নিউমেরিক্যাল মানে রূপান্তর করে ইনস্ট্যান্ট ফিল্টারিং সম্পন্ন হয়।
+
+### ৪. 🔒 সুরক্ষিত প্রডাক্ট বিস্তারিত পেজ (Protected Product Details Page)
+- যেকোনো পণ্যের বিস্তারিত কার্ড দেখতে চাইলে ইউজারকে অবশ্যই লগইন থাকতে হবে।
+- অননুমোদিত ইউজার ক্লিক করলে স্বয়ংক্রিয়ভাবে সাইন ইন পেজে রিডাইরেক্ট হবে এবং সফলভাবে সাইন ইন করার পর কাঙ্ক্ষিত প্রডাক্ট পেজেই ফিরিয়ে আনবে।
+- পেজে সর্বনিম্ন দাম, সর্বোচ্চ দাম ও গড় দামের সারাংশ এবং বিভিন্ন বাজারের দামের তুলনামূলক টেবিল প্রদর্শিত হয়।
+
+### ৫. 👤 ইউজার অথেনটিকেশন ও প্রোফাইল আপডেট (Auth & Profile Update Route)
+- Better Auth দিয়ে সহজে সাইন আপ, সাইন ইন ও সাইন আউট করার ব্যবস্থা।
+- গুগল ও গিটহাব দিয়ে ১-ক্লিকে সোশ্যাল লগইন সুবিধা।
+- চ্যালেঞ্জ ৩ অনুযায়ী ডেডিকেটেড `/profile/update` সাবরুট, যার মাধ্যমে ব্যবহারকারী সহজে তার নাম আপডেট করতে পারেন।
+- প্রতিটি পদক্ষেপে ইউজার-ফ্রেন্ডলি `react-toastify` নোটিফিকেশন প্রদান করা হয়।
+
+### ৬. 📱 শতভাগ রেসপনসিভ ডিজাইন (Fully Responsive)
+- মোবাইল, ট্যাবলেট, ল্যাপটপ এবং বড় ডেস্কটপ স্ক্রিনে নিখুঁতভাবে দেখার উপযোগী ফ্লুইড গ্রিড লেআউট।
+
+---
+
+## ⚙️ লোকাল মেশিনে রান করার নিয়ম (How to Run Locally)
+
+১. **রিপোজিটরি ক্লোন করুন:**
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/your-username/bazar-dor-project.git
+cd bazar-dor-project
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+২. **প্রয়োজনীয় প্যাকেজ ইন্সটল করুন:**
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+৩. **এনভায়রনমেন্ট ভ্যারিয়েবল সেটআপ করুন (`.env` ফাইল তৈরি করুন):**
+```env
+BETTER_AUTH_SECRET="your_strong_secret_key"
+BETTER_AUTH_URL="http://localhost:3000"
+BETTER_AUTH_MONGO_URI="mongodb+srv://username:password@cluster.mongodb.net/bazar-dor"
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+৪. **ডেভেলপমেন্ট সার্ভার চালু করুন:**
+```bash
+npm run dev
+```
 
-## Learn More
+ব্রাউজারে [http://localhost:3000](http://localhost:3000) লিংকে ভিজিট করুন।
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📝 লাইসেন্স (License)
+এই প্রজেক্টটি শিক্ষামূলক উদ্দেশ্যে মুক্তভাবে ব্যবহারের জন্য উন্মুক্ত (MIT License)।

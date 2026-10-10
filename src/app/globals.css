@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* ========================================================
    মারকুই অ্যানিমেশন (Marquee Continuous Scrolling Effect)
    সহজ সিএসএস দিয়ে স্মুথভাবে স্ক্রোল করানোর জন্য

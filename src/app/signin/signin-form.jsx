@@ -1,15 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { toast } from "react-toastify";
 import { authClient } from "@/lib/auth-client";
 import SocialAuth from "../components/SocialAuth";
 
 export default function SigninForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+
+  // প্রোটেক্টেড রাউট থেকে রিডাইরেক্ট হয়ে আসলে টোস্ট দেখানো (যাতে ডুপ্লিকেট না হয় তাই toastId ব্যবহার করা হয়েছে)
+  useEffect(() => {
+    if (searchParams.get("auth_required") === "true") {
+      if (!toast.isActive("auth-required-toast")) {
+        toast.warn("পণ্যের বিস্তারিত দেখতে অনুগ্রহ করে সাইন ইন করুন!", {
+          toastId: "auth-required-toast",
+        });
+      }
+    }
+  }, [searchParams]);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -27,17 +40,22 @@ export default function SigninForm() {
       });
 
       if (error) {
-        setMessage(error.message || "ইমেইল বা পাসওয়ার্ড সঠিক নয়।");
+        const errorText = error.message || "ইমেইল বা পাসওয়ার্ড সঠিক নয়।";
+        setMessage(errorText);
+        toast.error(errorText);
         setLoading(false);
         return;
       }
 
-      // সফল হলে হোম পেজে রিডাইরেক্ট হবে
-      router.push("/");
+      toast.success("সফলভাবে সাইন ইন হয়েছে!");
+      const redirectUrl = searchParams.get("redirect") || "/";
+      router.push(redirectUrl);
       router.refresh();
     } catch (err) {
       console.error("Sign in error:", err);
-      setMessage("সাইন ইন করতে সমস্যা হয়েছে। আবার চেষ্টা করুন।");
+      const errText = "সাইন ইন করতে সমস্যা হয়েছে। আবার চেষ্টা করুন।";
+      setMessage(errText);
+      toast.error(errText);
       setLoading(false);
     }
   }
@@ -125,5 +143,3 @@ export default function SigninForm() {
     </form>
   );
 }
-
-
