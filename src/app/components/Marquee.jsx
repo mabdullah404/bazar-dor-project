@@ -35,12 +35,13 @@ async function getProducts() {
     );
 
     if (!res.ok) {
-      throw new Error("Failed to fetch products");
+      console.warn(`[Marquee] প্রোডাক্ট API রেসপন্স কোড: ${res.status}`);
+      return [];
     }
 
     return await res.json();
   } catch (error) {
-    console.error("মারকুই প্রডাক্ট ফেচ করতে সমস্যা হয়েছে:", error);
+    console.warn("[Marquee] প্রডাক্ট ফেচ সতর্কবার্তা:", error.message);
     return [];
   }
 }
