@@ -6,7 +6,6 @@ import Link from "next/link";
 
 // ====================================================================
 // হিরো সেকশন কম্পোনেন্ট (Hero Section)
-// ফিগমা ডিজাইন অনুযায়ী সহজে তৈরি করা হয়েছে
 // ====================================================================
 const Hero = () => {
   // আজকের তারিখ বাংলায় ডায়নামিকভাবে দেখানোর জন্য স্টেট
@@ -26,7 +25,7 @@ const Hero = () => {
 
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-      {/* ফিগমার মতো রাউন্ডেড ব্যাকগ্রাউন্ড কার্ড কন্টেইনার */}
+      {/* রাউন্ডেড ব্যাকগ্রাউন্ড কার্ড কন্টেইনার */}
       <div className="bg-white border border-gray-200/80 rounded-3xl p-6 sm:p-10 lg:p-12 shadow-2xs">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
           
@@ -40,12 +39,12 @@ const Hero = () => {
               </span>
             </div>
 
-            {/* ২. মূল টাইটেল (Title) */}
+            {/* ২.  (Title) */}
             <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight tracking-tight">
               আজকের বাজারের দাম এক নজরে
             </h1>
 
-            {/* ৩. বর্ণনা (Subtitle / Description) */}
+            {/* ৩. (Subtitle / Description) */}
             <p className="text-gray-600 text-sm sm:text-base leading-relaxed max-w-xl">
               চাল, ডাল, তেল, সবজি, মাছ, মাংস, ডিম ও মসলার দাম — বাজারভিত্তিক
               বিস্তারিত, গড়, সর্বনিম্ন-সর্বাধিক এবং দামের পরিবর্তন এক জায়গায়।

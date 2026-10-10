@@ -8,9 +8,7 @@ import Link from "next/link";
 export default function NotFound() {
   return (
     <div className="min-h-[75vh] flex items-center justify-center px-4 py-12">
-      {/* ১. মাঝখানের সুন্দর রাউন্ডেড কার্ড */}
       <div className="bg-white border border-gray-100 rounded-3xl p-8 sm:p-12 shadow-sm max-w-lg w-full text-center">
-        
         {/* ২. ৪০৪ স্টাইলাইজড ব্যাজ ও আইকন */}
         <div className="inline-flex items-center justify-center w-24 h-24 rounded-3xl bg-emerald-50 text-[#059669] mb-6 shadow-inner">
           <span className="text-4xl">🔍</span>
@@ -27,10 +25,9 @@ export default function NotFound() {
           পৃষ্ঠাটি খুঁজে পাওয়া যায়নি!
         </h1>
 
-        {/* ৪. বর্ণনামূলক মেসেজ */}
         <p className="text-gray-500 text-sm sm:text-base leading-relaxed mb-8 max-w-md mx-auto">
-          দুঃখিত, আপনি যে ঠিকানায় যাওয়ার চেষ্টা করছেন তা বিদ্যমান নেই অথবা সরানো হয়েছে।
-          সঠিক তথ্যের জন্য দয়া করে হোম পেজে ফিরে যান।
+          দুঃখিত, আপনি যে ঠিকানায় যাওয়ার চেষ্টা করছেন তা বিদ্যমান নেই অথবা সরানো
+          হয়েছে। সঠিক তথ্যের জন্য দয়া করে হোম পেজে ফিরে যান।
         </p>
 
         {/* ৫. অ্যাকশন বাটনসমূহ */}
@@ -53,7 +50,6 @@ export default function NotFound() {
             <span>সকল বাজার দর দেখুন</span>
           </Link>
         </div>
-
       </div>
     </div>
   );

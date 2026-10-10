@@ -8,7 +8,6 @@ import { authClient } from "@/lib/auth-client";
 
 // ====================================================================
 // প্রোফাইল তথ্য আপডেট সাবরুট (/profile/update)
-// সাধারণ ও সহজে বোঝার মতো কোড
 // ====================================================================
 export default function UpdateProfilePage() {
   const router = useRouter();

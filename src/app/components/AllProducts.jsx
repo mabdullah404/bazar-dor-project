@@ -2,7 +2,7 @@ import React from "react";
 import ProductGridClient from "./ProductGridClient";
 
 // ====================================================================
-// ১. API থেকে প্রডাক্ট ফেচ করার সহজ ফাংশন
+// ১. API থেকে প্রডাক্ট ফেচ ফাংশন
 // ====================================================================
 async function getProducts(category) {
   try {
@@ -41,7 +41,7 @@ export default async function AllProducts({ category = "" }) {
 
   return (
     <section id="সব-পণ্য" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 scroll-mt-6">
-      {/* অল্টারনেটিভ আইডি যাতে #all-products ও কাজ করে */}
+    
       <div id="all-products" />
 
       {/* ক্লায়েন্ট কম্পোনেন্টে সর্টিং এবং কার্ড রেন্ডারিং */}

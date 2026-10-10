@@ -4,10 +4,7 @@ import React, { Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
-// ====================================================================
-// ক্যাটাগরি পিলস কম্পোনেন্ট (Active Category Highlight)
-// ব্যবহারকারী যে ক্যাটাগরিতে ক্লিক করবে সেটি হাইলাইট হয়ে থাকবে
-// ====================================================================
+
 function CategoryPillsContent({ categories = [] }) {
   const searchParams = useSearchParams();
   const currentCategory = searchParams.get("category") || "";
