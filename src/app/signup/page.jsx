@@ -23,7 +23,7 @@ export default function SignupPage() {
         {/* সাইন আপ ফর্ম ও সোশ্যাল বাটন */}
         <SignupForm />
 
-        {/* হোম পেজে ফিরে যাওয়ার লিঙ্ক */}
+      
         <div className="mt-6 text-center">
           <Link
             href="/"
