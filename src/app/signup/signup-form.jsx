@@ -2,23 +2,53 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 import SocialAuth from "../components/SocialAuth";
 
 export default function SignupForm() {
+  const router = useRouter();
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
+    setMessage("");
 
     const formData = new FormData(event.currentTarget);
-    if (formData.get("password") !== formData.get("confirmPassword")) {
+    const name = formData.get("name");
+    const email = formData.get("email");
+    const password = formData.get("password");
+    const confirmPassword = formData.get("confirmPassword");
+
+    if (password !== confirmPassword) {
       setMessage("দুটি পাসওয়ার্ড মিলছে না। আবার পরীক্ষা করুন।");
       return;
     }
 
-    setMessage(
-      "রেজিস্ট্রেশন সেবা এখনো চালু হয়নি। অ্যাকাউন্ট তৈরির API যুক্ত হলে সাইন আপ করা যাবে।"
-    );
+    setLoading(true);
+
+    try {
+      const { data, error } = await authClient.signUp.email({
+        name,
+        email,
+        password,
+      });
+
+      if (error) {
+        setMessage(error.message || "অ্যাকাউন্ট তৈরি করতে সমস্যা হয়েছে।");
+        setLoading(false);
+        return;
+      }
+
+      // সফল হলে হোম পেজে রিডাইরেক্ট হবে
+      router.push("/");
+      router.refresh();
+    } catch (err) {
+      console.error("Sign up error:", err);
+      setMessage("অ্যাকাউন্ট তৈরিতে ত্রুটি হয়েছে। আবার চেষ্টা করুন।");
+      setLoading(false);
+    }
   }
 
   const inputClassName =
@@ -101,7 +131,7 @@ export default function SignupForm() {
         <p
           role="status"
           aria-live="polite"
-          className="rounded-xl bg-amber-50 px-3.5 py-3 text-xs sm:text-sm leading-6 text-amber-800"
+          className="rounded-xl bg-red-50 border border-red-200 px-3.5 py-3 text-xs sm:text-sm leading-6 text-red-700"
         >
           {message}
         </p>
@@ -109,9 +139,17 @@ export default function SignupForm() {
 
       <button
         type="submit"
-        className="w-full rounded-xl bg-[#059669] px-4 py-3 font-semibold text-sm sm:text-base text-white shadow-xs transition hover:bg-[#047857] cursor-pointer"
+        disabled={loading}
+        className="w-full rounded-xl bg-[#059669] px-4 py-3 font-semibold text-sm sm:text-base text-white shadow-xs transition hover:bg-[#047857] cursor-pointer disabled:opacity-60 flex items-center justify-center gap-2"
       >
-        অ্যাকাউন্ট তৈরি করুন
+        {loading ? (
+          <>
+            <span className="loading loading-spinner loading-xs"></span>
+            অ্যাকাউন্ট তৈরি হচ্ছে...
+          </>
+        ) : (
+          "অ্যাকাউন্ট তৈরি করুন"
+        )}
       </button>
 
       {/* আলাদা সোশ্যাল অথ কম্পোনেন্ট */}
@@ -130,4 +168,5 @@ export default function SignupForm() {
     </form>
   );
 }
+
 
