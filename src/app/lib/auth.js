@@ -31,6 +31,8 @@ export const auth = betterAuth({
       ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
       : process.env.VERCEL_URL
       ? `https://${process.env.VERCEL_URL}`
+      : process.env.NODE_ENV === "production"
+      ? "https://bazar-dor-project-omega.vercel.app"
       : "http://localhost:3000"),
   emailAndPassword: {
     enabled: true,
