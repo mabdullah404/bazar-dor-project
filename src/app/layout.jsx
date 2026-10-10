@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Hind_Siliguri } from "next/font/google";
 import "./globals.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -18,6 +19,9 @@ export const metadata = {
   description: "বাংলাদেশের নিত্যপ্রয়োজনীয় পণ্যের আজকের বাজার দর দেখুন।",
 };
 
+export const instant = false;
+
+
 export default function RootLayout({ children }) {
   return (
     <html
@@ -28,13 +32,15 @@ export default function RootLayout({ children }) {
       <body className="min-h-full flex flex-col bg-[#f4f7f5] text-gray-900 font-sans">
         {/* সব পেজে ন্যাভবার */}
         <Navbar />
-        
+
         {/* সব পেজে মারকুই লাইভ প্রাইস টিকার */}
-        <Marquee />
-        
+        <Suspense fallback={null}>
+          <Marquee />
+        </Suspense>
+
         {/* মূল পেজ কনটেন্ট */}
         <div className="flex-1">{children}</div>
-        
+
         {/* সব পেজে ফুটার */}
         <Footer />
 

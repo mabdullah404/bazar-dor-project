@@ -1,6 +1,8 @@
 import React from "react";
 import Link from "next/link";
 
+export const instant = false;
+
 // ====================================================================
 // গ্লোবাল ৪০৪ পেইজ (Global 404 Not Found Page)
 // ব্যবহারকারী ভুল বা অজানা কোনো রুটে গেলে Next.js স্বয়ংক্রিয়ভাবে এটি দেখাবে

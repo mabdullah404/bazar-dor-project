@@ -4,6 +4,8 @@ import { notFound, redirect } from "next/navigation";
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
 
+export const instant = false;
+
 // ====================================================================
 // ১. সংখ্যাকে বাংলায় রূপান্তর 
 // ====================================================================

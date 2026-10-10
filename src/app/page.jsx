@@ -3,6 +3,8 @@ import Hero from "./components/Hero";
 import PriceChanges from "./components/PriceChanges";
 import AllProducts from "./components/AllProducts";
 
+export const instant = false;
+
 // ====================================================================
 // হোম পেইজ (Home Page)
 // এখানে পর্যায়ক্রমে হিরো, দাম বৃদ্ধি-হ্রাস এবং সব পণ্য সেকশন সাজানো হয়েছে
