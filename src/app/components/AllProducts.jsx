@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 // ====================================================================
 // ১. সংখ্যাকে বাংলায় রূপান্তর করার ফাংশন (যেমন: ৩৩ -> ৩৩, ১২৯০ -> ১,২৯০)
@@ -105,20 +106,21 @@ export default async function AllProducts({ category = "" }) {
           const pct = formatPercentage(product.change?.pct);
 
           return (
-            <div
+            <Link
               key={product.id}
-              className="bg-white border border-gray-100 rounded-2xl p-5 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between"
+              href={`/products/${product.id}`}
+              className="group bg-white border border-gray-100 hover:border-emerald-300 rounded-2xl p-5 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between cursor-pointer"
             >
               {/* কার্ডের উপরের অংশ: আইকন, নাম ও একক */}
               <div className="flex items-center gap-3.5">
                 {/* আইকন বক্স */}
-                <div className="w-12 h-12 rounded-2xl bg-gray-50 flex items-center justify-center shrink-0 text-2xl select-none">
+                <div className="w-12 h-12 rounded-2xl bg-gray-50 group-hover:bg-emerald-50 transition-colors flex items-center justify-center shrink-0 text-2xl select-none">
                   {product.image || product.categoryIcon || "🛒"}
                 </div>
 
                 {/* প্রডাক্টের নাম ও পরিমাপের একক */}
                 <div>
-                  <h3 className="font-bold text-gray-900 text-base leading-snug">
+                  <h3 className="font-bold text-gray-900 group-hover:text-[#059669] transition-colors text-base leading-snug">
                     {product.nameBn}
                   </h3>
                   <p className="text-xs text-gray-400 mt-0.5">
@@ -160,7 +162,7 @@ export default async function AllProducts({ category = "" }) {
                   )}
                 </div>
               </div>
-            </div>
+            </Link>
           );
         })}
         </div>

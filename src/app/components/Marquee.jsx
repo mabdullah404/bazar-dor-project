@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 // ====================================================================
 // ১. ইংরেজি সংখ্যাকে বাংলায় রূপান্তর করার জন্য সহজ ফাংশন
@@ -68,9 +69,10 @@ const Marquee = async () => {
           const isDown = product.change?.dir === "down";
 
           return (
-            <div
+            <Link
               key={`${product.id}-${index}`}
-              className="flex items-center gap-2 px-5 border-r border-gray-200 text-xs sm:text-sm whitespace-nowrap shrink-0"
+              href={`/products/${product.id}`}
+              className="flex items-center gap-2 px-5 border-r border-gray-200 text-xs sm:text-sm whitespace-nowrap shrink-0 hover:bg-gray-100/70 transition-colors"
             >
               {/* প্রডাক্টের আইকন */}
               <span className="text-base leading-none">
@@ -99,7 +101,7 @@ const Marquee = async () => {
                   ▼ {toBengaliNumber(Math.abs(product.change.pct))}%
                 </span>
               )}
-            </div>
+            </Link>
           );
         })}
       </div>

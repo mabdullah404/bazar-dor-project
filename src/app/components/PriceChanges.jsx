@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 // ====================================================================
 // ১. সংখ্যাকে বাংলায় রূপান্তর করার সহজ ফাংশন (কমা সহ যেমন: ১,২৯০)
@@ -56,17 +57,20 @@ function ProductCard({ product, type }) {
   );
 
   return (
-    <div className="bg-white border border-gray-100 rounded-2xl p-5 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between">
+    <Link
+      href={`/products/${product.id}`}
+      className="group bg-white border border-gray-100 hover:border-emerald-300 rounded-2xl p-5 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between cursor-pointer"
+    >
       {/* কার্ডের উপরের অংশ: আইকন, নাম ও একক */}
       <div className="flex items-center gap-3.5">
         {/* আইকন বক্স */}
-        <div className="w-12 h-12 rounded-2xl bg-gray-50 flex items-center justify-center shrink-0 text-2xl select-none">
+        <div className="w-12 h-12 rounded-2xl bg-gray-50 group-hover:bg-emerald-50 transition-colors flex items-center justify-center shrink-0 text-2xl select-none">
           {product.image || product.categoryIcon || "🛒"}
         </div>
         
         {/* প্রডাক্টের নাম এবং প্রতি কেজি/ডজন */}
         <div>
-          <h3 className="font-bold text-gray-900 text-base leading-snug">
+          <h3 className="font-bold text-gray-900 group-hover:text-[#059669] transition-colors text-base leading-snug">
             {product.nameBn}
           </h3>
           <p className="text-xs text-gray-400 mt-0.5">
@@ -100,7 +104,7 @@ function ProductCard({ product, type }) {
           )}
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
