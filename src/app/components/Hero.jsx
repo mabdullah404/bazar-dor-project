@@ -68,6 +68,7 @@ const Hero = () => {
                 src="/bazar-hero.png"
                 alt="বাজার দর হিরো ইলাস্ট্রেশন"
                 fill
+                sizes="(max-width: 768px) 280px, 340px"
                 priority
                 className="object-contain"
               />

@@ -12,7 +12,12 @@ const UserInfo = () => {
   const user = session?.user;
 
   const [isOpen, setIsOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // বাইরে ক্লিক করলে ড্রপডাউন বন্ধ হবে
   useEffect(() => {
@@ -37,10 +42,10 @@ const UserInfo = () => {
     }
   };
 
-  // লোডিং স্টেট
-  if (isPending) {
+  // SSR বা প্রিরেন্ডার চলাকালীন নিরাপদ লোডিং স্টেট
+  if (!mounted || isPending) {
     return (
-      <div className="flex items-center gap-3 animate-pulse">
+      <div className="flex items-center gap-2 sm:gap-3">
         <div className="w-16 h-8 bg-gray-100 rounded-lg"></div>
         <div className="w-20 h-9 bg-gray-100 rounded-xl"></div>
       </div>

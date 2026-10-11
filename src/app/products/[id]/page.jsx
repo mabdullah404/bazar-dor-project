@@ -4,6 +4,8 @@ import { notFound, redirect } from "next/navigation";
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
 
+import { connection } from "next/server";
+
 export const instant = false;
 
 // ====================================================================
@@ -111,6 +113,7 @@ export async function generateMetadata({ params }) {
 // ৭. প্রডাক্ট ডিটেইলস পেজ কম্পোনেন্ট (Protected Route)
 // ====================================================================
 export default async function ProductDetailPage({ params }) {
+  await connection();
   const { id } = await params;
 
   // প্রোটেক্টেড রাউট চেক — ইউজার লগইন না থাকলে সাইন ইন পেজে পাঠাবে

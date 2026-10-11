@@ -12,6 +12,7 @@ export default function SigninForm() {
   const searchParams = useSearchParams();
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   // প্রোটেক্টেড রাউট থেকে রিডাইরেক্ট হয়ে আসলে টোস্ট দেখানো (যাতে ডুপ্লিকেট না হয় তাই toastId ব্যবহার করা হয়েছে)
   useEffect(() => {
@@ -90,16 +91,25 @@ export default function SigninForm() {
         >
           পাসওয়ার্ড
         </label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          autoComplete="current-password"
-          placeholder="কমপক্ষে ৮ অক্ষর"
-          minLength={8}
-          className={inputClassName}
-          required
-        />
+        <div className="relative">
+          <input
+            id="password"
+            name="password"
+            type={showPassword ? "text" : "password"}
+            autoComplete="current-password"
+            placeholder="কমপক্ষে ৮ অক্ষর"
+            minLength={8}
+            className={`${inputClassName} pr-16`}
+            required
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-gray-500 hover:text-[#059669] cursor-pointer select-none transition-colors"
+          >
+            {showPassword ? "লুকান" : "দেখুন"}
+          </button>
+        </div>
       </div>
 
       {message && (

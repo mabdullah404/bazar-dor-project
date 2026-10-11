@@ -9,7 +9,7 @@ const Navlinks = async () => {
       "https://api.abcz.workers.dev/api/bazardor/categories",
       {
         // Revalidate cache periodically (e.g. every hour)
-        next: { revalidate: 3600 },
+        next: { revalidate: 40 },
       }
     );
 

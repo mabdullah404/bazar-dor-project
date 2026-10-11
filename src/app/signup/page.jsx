@@ -1,4 +1,8 @@
 import Link from "next/link";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
+import { connection } from "next/server";
+import { auth } from "@/lib/auth";
 import SignupForm from "./signup-form";
 
 export const metadata = {
@@ -6,7 +10,18 @@ export const metadata = {
   description: "বাজার দর-এ আপনার অ্যাকাউন্ট তৈরি করুন।",
 };
 
-export default function SignupPage() {
+export const instant = false;
+
+export default async function SignupPage() {
+  await connection();
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (session?.user) {
+    redirect("/");
+  }
+
   return (
     <main className="flex flex-col items-center justify-center px-4 py-10 sm:py-14">
       <div className="w-full max-w-md">

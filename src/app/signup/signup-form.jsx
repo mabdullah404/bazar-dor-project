@@ -11,6 +11,8 @@ export default function SignupForm() {
   const router = useRouter();
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -46,9 +48,10 @@ export default function SignupForm() {
         return;
       }
 
-      // সফল হলে সাইন ইন পেজে পাঠাবে এবং সাকসেস টোস্ট দেখাবে
-      toast.success("অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে! অনুগ্রহ করে সাইন ইন করুন।");
-      router.push("/signin");
+      // better-auth সাইন আপ সফল হওয়ার সাথে সাথেই অটোমেটিক লগইন ও সেশন তৈরি করে ফেলে।
+      // তাই সাইন ইন পেজে না পাঠিয়ে সরাসরি লগইন অবস্থায় হোম পেজে রিডাইরেক্ট করা হচ্ছে:
+      toast.success("অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে! স্বাগতম।");
+      router.push("/");
       router.refresh();
     } catch (err) {
       console.error("Sign up error:", err);
@@ -104,16 +107,25 @@ export default function SignupForm() {
         >
           পাসওয়ার্ড
         </label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          autoComplete="new-password"
-          placeholder="কমপক্ষে ৮ অক্ষর"
-          minLength={8}
-          className={inputClassName}
-          required
-        />
+        <div className="relative">
+          <input
+            id="password"
+            name="password"
+            type={showPassword ? "text" : "password"}
+            autoComplete="new-password"
+            placeholder="কমপক্ষে ৮ অক্ষর"
+            minLength={8}
+            className={`${inputClassName} pr-16`}
+            required
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-gray-500 hover:text-[#059669] cursor-pointer select-none transition-colors"
+          >
+            {showPassword ? "লুকান" : "দেখুন"}
+          </button>
+        </div>
       </div>
 
       <div>
@@ -123,16 +135,25 @@ export default function SignupForm() {
         >
           পাসওয়ার্ড নিশ্চিত করুন
         </label>
-        <input
-          id="confirmPassword"
-          name="confirmPassword"
-          type="password"
-          autoComplete="new-password"
-          placeholder="আবার লিখুন"
-          minLength={8}
-          className={inputClassName}
-          required
-        />
+        <div className="relative">
+          <input
+            id="confirmPassword"
+            name="confirmPassword"
+            type={showConfirmPassword ? "text" : "password"}
+            autoComplete="new-password"
+            placeholder="আবার লিখুন"
+            minLength={8}
+            className={`${inputClassName} pr-16`}
+            required
+          />
+          <button
+            type="button"
+            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-gray-500 hover:text-[#059669] cursor-pointer select-none transition-colors"
+          >
+            {showConfirmPassword ? "লুকান" : "দেখুন"}
+          </button>
+        </div>
       </div>
 
       {message && (

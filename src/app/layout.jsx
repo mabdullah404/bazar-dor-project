@@ -31,7 +31,9 @@ export default function RootLayout({ children }) {
     >
       <body className="min-h-full flex flex-col bg-[#f4f7f5] text-gray-900 font-sans">
         {/* সব পেজে ন্যাভবার */}
-        <Navbar />
+        <Suspense fallback={<div className="h-20 bg-white border-b border-gray-100" />}>
+          <Navbar />
+        </Suspense>
 
         {/* সব পেজে মারকুই লাইভ প্রাইস টিকার */}
         <Suspense fallback={null}>
@@ -39,10 +41,14 @@ export default function RootLayout({ children }) {
         </Suspense>
 
         {/* মূল পেজ কনটেন্ট */}
-        <div className="flex-1">{children}</div>
+        <Suspense fallback={null}>
+          <div className="flex-1">{children}</div>
+        </Suspense>
 
         {/* সব পেজে ফুটার */}
-        <Footer />
+        <Suspense fallback={null}>
+          <Footer />
+        </Suspense>
 
         {/* টোস্ট নোটিফিকেশন কনটেইনার */}
         <ToastContainer position="top-center" autoClose={3000} limit={3} />

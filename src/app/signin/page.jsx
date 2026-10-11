@@ -1,4 +1,9 @@
+import React, { Suspense } from "react";
 import Link from "next/link";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
+import { connection } from "next/server";
+import { auth } from "@/lib/auth";
 import SigninForm from "./signin-form";
 
 export const metadata = {
@@ -6,7 +11,18 @@ export const metadata = {
   description: "বাজার দর-এ আপনার অ্যাকাউন্টে সাইন ইন করুন।",
 };
 
-export default function SigninPage() {
+export const instant = false;
+
+export default async function SigninPage() {
+  await connection();
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (session?.user) {
+    redirect("/");
+  }
+
   return (
     <main className="flex flex-col items-center justify-center px-4 py-10 sm:py-14">
       <div className="w-full max-w-md">
@@ -21,7 +37,9 @@ export default function SigninPage() {
         </div>
 
         {/* সাইন ইন ফর্ম ও সোশ্যাল বাটন */}
-        <SigninForm />
+        <Suspense fallback={<div className="h-48 flex items-center justify-center text-sm text-gray-400">লোড হচ্ছে...</div>}>
+          <SigninForm />
+        </Suspense>
 
         {/* হোম পেজে ফিরে যাওয়ার লিঙ্ক */}
         <div className="mt-6 text-center">
